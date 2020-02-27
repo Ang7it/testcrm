@@ -2,6 +2,7 @@ package com.demo.model;
 
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,13 +19,13 @@ public class Domain {
 	@NotNull
 	private String domainName;
 	@ElementCollection
-	@OneToMany(mappedBy = "domain")
-	private Collection<Organisation> organsiations;
+	@OneToMany(mappedBy = "domain",cascade = CascadeType.ALL)
+	private Collection<Organisation> organisations;
 	public Domain() {
 	}
-	public Domain(String domainName, Collection<Organisation> organsiations) {
+	public Domain(String domainName, Collection<Organisation> organisations) {
 		this.domainName = domainName;
-		this.organsiations = organsiations;
+		this.organisations = organisations;
 	}
 	public String getDomainName() {
 		return domainName;
@@ -33,11 +34,11 @@ public class Domain {
 		this.domainName = domainName;
 	}
 	public Collection<Organisation> getOrgansiations() {
-		return organsiations;
+		return organisations;
 	}
 	public void addOrgansiation(Organisation organsiation) {
 		if(organsiation!=null) {
-		     organsiations.add(organsiation);	
+		     organisations.add(organsiation);	
 		}
 	}
 	public Long getId() {
