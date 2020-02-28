@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -52,11 +53,11 @@ public class ProformaInvoice {
 	private Timestamp invoiceCreationTimestamp;
 	@Column(nullable = true)
 	private Timestamp invoiceUpdationTimestamp;
-	@OneToMany(mappedBy = "proformaInvoice")
+	@OneToMany(targetEntity = com.demo.model.PaymentDetails.class,cascade = CascadeType.ALL)
 	private Collection<PaymentDetails> paymentDetails;
 	@OneToOne(mappedBy = "proformaInvoice")
 	private PeForm peForm;
-	@OneToMany(mappedBy = "proformaInvoice")
+	@OneToMany(targetEntity = com.demo.model.QueryForm.class,cascade = CascadeType.ALL)
 	private Collection<QueryForm> queryForms;
 	@OneToOne(mappedBy = "proformaInvoice")
 	private TaxInvoiceForm taxInvoiceForm;

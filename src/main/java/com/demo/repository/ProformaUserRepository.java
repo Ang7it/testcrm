@@ -7,5 +7,6 @@ import com.demo.model.ProformaUser;
 
 @Repository
 public interface ProformaUserRepository extends JpaRepository<ProformaUser, Long> {
-
+     
+	public ProformaUser findByOrganisation_id(Long id);
 }

@@ -1,9 +1,10 @@
 package com.demo.model;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,12 +19,11 @@ public class Domain {
 	private Long id;
 	@NotNull
 	private String domainName;
-	@ElementCollection
-	@OneToMany(mappedBy = "domain",cascade = CascadeType.ALL)
-	private Collection<Organisation> organisations;
+	@OneToMany(targetEntity = com.demo.model.Domain.class,cascade = CascadeType.ALL)
+	private List<Organisation> organisations=new ArrayList<>();
 	public Domain() {
 	}
-	public Domain(String domainName, Collection<Organisation> organisations) {
+	public Domain(String domainName, List<Organisation> organisations) {
 		this.domainName = domainName;
 		this.organisations = organisations;
 	}
@@ -33,7 +33,7 @@ public class Domain {
 	public void setDomainName(String domainName) {
 		this.domainName = domainName;
 	}
-	public Collection<Organisation> getOrgansiations() {
+	public List<Organisation> getOrgansiations() {
 		return organisations;
 	}
 	public void addOrgansiation(Organisation organsiation) {

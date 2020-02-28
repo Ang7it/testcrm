@@ -1,10 +1,11 @@
 package com.demo.model;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
-import javax.persistence.ElementCollection;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,14 +30,13 @@ public class Organisation {
 	@JoinColumn(nullable = false)
 	@Fetch(FetchMode.JOIN)
 	private Domain domain;
-	@ElementCollection
-	@OneToMany(mappedBy = "organisation")
-    private Collection<ProformaInvoice> proformaInvoiceList;
+	@OneToMany(targetEntity = com.demo.model.ProformaInvoice.class,cascade = CascadeType.ALL)
+    private List<ProformaInvoice> proformaInvoiceList=new ArrayList<>();
 	@OneToOne(mappedBy = "organisation")
 	private ProformaUser proformaUSer;
 	public Organisation() {
 	}
-	public Organisation(String organisationName,String uniqueKey, Domain domainId, Collection<ProformaInvoice> prformaInvoice) {
+	public Organisation(String organisationName,String uniqueKey, Domain domainId, List<ProformaInvoice> prformaInvoice) {
 		this.organisationName = organisationName;
 		this.domain = domainId;
 		this.proformaInvoiceList = prformaInvoice;
@@ -54,7 +54,7 @@ public class Organisation {
 	public void setDomainId(Domain domainId) {
 		this.domain = domainId;
 	}
-	public Collection<ProformaInvoice> getPrformaInvoice() {
+	public List<ProformaInvoice> getPrformaInvoice() {
 		return proformaInvoiceList;
 	}
 	public void addPrformaInvoice(ProformaInvoice proformaInvoice) {
