@@ -15,7 +15,6 @@ public class QueryForm {
 	private String fileName;
 	private String filePath;
 	@ManyToOne
-	@JoinColumn
 	private ProformaInvoice proformaInvoice;
 
 	public QueryForm() {

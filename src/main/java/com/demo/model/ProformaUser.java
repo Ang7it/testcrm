@@ -12,11 +12,12 @@ import javax.persistence.OneToOne;
 
 @Entity
 public class ProformaUser {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@OneToOne
-	@JoinColumn
+//	@JoinColumn
 	private Organisation organisation;
 	private String userName;
 	private String emailId;
@@ -26,6 +27,8 @@ public class ProformaUser {
 	private String landlineNUmber;
 	@Column(nullable = false,columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	private Timestamp piCreationTimestamp;
+//	@OneToOne(mappedBy = "proformaUser")
+//	private ProformaInvoice proformaInvoice;
 	public ProformaUser() {
 	}
 	public ProformaUser(String userName, String emailId, String contactNumber, String userAddress, String nodalOfficer,
@@ -82,4 +85,17 @@ public class ProformaUser {
 	public Long getId() {
 		return id;
 	}
+	
+	public Organisation getOrganisation() {
+		return organisation;
+	}
+	public void setOrganisation(Organisation organisation) {
+		this.organisation = organisation;
+	}
+//	public ProformaInvoice getProformaInvoice() {
+//		return proformaInvoice;
+//	}
+//	public void setProformaInvoice(ProformaInvoice proformaInvoice) {
+//		this.proformaInvoice = proformaInvoice;
+//	}
 }

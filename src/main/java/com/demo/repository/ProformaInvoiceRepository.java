@@ -11,7 +11,7 @@ import com.demo.model.ProformaInvoice;
 @Repository
 public interface ProformaInvoiceRepository extends JpaRepository<ProformaInvoice, Long> {
 	
-     public List<ProformaInvoice> findByOrganisation_id(Long id);
+     public List<ProformaInvoice> findByOrganisation_Id(Long id);
      
      public ProformaInvoice findByPiNumber(String piNumber);
 }

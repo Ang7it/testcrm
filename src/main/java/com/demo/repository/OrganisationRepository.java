@@ -11,9 +11,4 @@ import com.demo.model.Organisation;
 @Repository
 public interface OrganisationRepository extends JpaRepository<Organisation, Long>{
 	
-	@Query("select o.uniqueKey,o.organisationName,o.domain from Organisation o")
-	public List<Organisation> getOrgDetailsForDashboard();
-	
-	public List<Organisation> findByDomain_id(Long id);
-
 }

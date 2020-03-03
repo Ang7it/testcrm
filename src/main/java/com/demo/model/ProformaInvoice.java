@@ -3,6 +3,7 @@ package com.demo.model;
 import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -19,6 +20,8 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.UniqueElements;
+
 @Entity
 public class ProformaInvoice {
 
@@ -26,9 +29,10 @@ public class ProformaInvoice {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long invoiceId;
 	@NotNull
+	@UniqueElements
 	private String piNumber;
 	@ManyToOne
-	@JoinColumn(nullable = false)
+//	@JoinColumn(nullable = false)
 	private Organisation organisation;
 	private String piReferenceNumber;
 	private String piAmount;
@@ -53,24 +57,18 @@ public class ProformaInvoice {
 	private Timestamp invoiceCreationTimestamp;
 	@Column(nullable = true)
 	private Timestamp invoiceUpdationTimestamp;
-	@OneToMany(targetEntity = com.demo.model.PaymentDetails.class,cascade = CascadeType.ALL)
-	private Collection<PaymentDetails> paymentDetails;
-	@OneToOne(mappedBy = "proformaInvoice")
-	private PeForm peForm;
-	@OneToMany(targetEntity = com.demo.model.QueryForm.class,cascade = CascadeType.ALL)
-	private Collection<QueryForm> queryForms;
-	@OneToOne(mappedBy = "proformaInvoice")
-	private TaxInvoiceForm taxInvoiceForm;
-
+	@OneToOne
+	@JoinColumn
+	private ProformaUser proformaUser;
 	public ProformaInvoice() {
 	}
 
-	public ProformaInvoice(String piNumber, Organisation organisationId, String piAmount, int piDuration,
+	public ProformaInvoice(String piNumber, Organisation organisation, String piAmount, int piDuration,
 			String ownerEmailID, String piCategory, Date accountCreationDate, String projectNumber, String gSTNumber,
 			int numberOFaccounts, int activeAccounts, int inactiveAccounts, int deletedAccounts, String invoiceNumber,
 			Date invoiceDate, int invoiceAmount, String financialYear) {
 		this.piNumber = piNumber;
-		this.organisation = organisationId;
+		this.organisation = organisation;
 		this.piAmount = piAmount;
 		this.piDuration = piDuration;
 		this.ownerEmailID = ownerEmailID;
@@ -94,14 +92,6 @@ public class ProformaInvoice {
 
 	public void setPiNumber(String piNumber) {
 		this.piNumber = piNumber;
-	}
-
-	public Organisation getOrganisationId() {
-		return organisation;
-	}
-
-	public void setOrganisationId(Organisation organisationId) {
-		this.organisation = organisationId;
 	}
 
 	public String getPiAmount() {
@@ -252,39 +242,20 @@ public class ProformaInvoice {
 		this.piReferenceNumber = piReferenceNumber;
 	}
 
-	public PeForm getPeForm() {
-		return peForm;
+	public Organisation getOrganisation() {
+		return organisation;
 	}
 
-	public void setPeForm(PeForm peForm) {
-		this.peForm = peForm;
+	public void setOrganisation(Organisation organisation) {
+		this.organisation = organisation;
 	}
 
-	public TaxInvoiceForm getTaxInvoiceForm() {
-		return taxInvoiceForm;
+	public ProformaUser getProformaUser() {
+		return proformaUser;
 	}
 
-	public void setTaxInvoiceForm(TaxInvoiceForm taxInvoiceForm) {
-		this.taxInvoiceForm = taxInvoiceForm;
+	public void setProformaUser(ProformaUser proformaUser) {
+		this.proformaUser = proformaUser;
 	}
-
-	public Collection<PaymentDetails> getPaymentDetails() {
-		return paymentDetails;
-	}
-
-	public void addPaymentDetails(PaymentDetails paymentDetail) {
-		if (paymentDetail != null) {
-			paymentDetails.add(paymentDetail);
-		}
-	}
-
-	public Collection<QueryForm> getQueryForm() {
-		return queryForms;
-	}
-
-	public void setQueryForm(QueryForm queryForm) {
-		if(queryForm!=null) {
-			queryForms.add(queryForm);
-		}
-	}
+	
 }

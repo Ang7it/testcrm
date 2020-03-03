@@ -1,18 +1,10 @@
 package com.demo.model;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Fetch;
@@ -27,19 +19,16 @@ public class Organisation {
 	private String uniqueKey;
 	private String organisationName;
 	@ManyToOne
-	@JoinColumn(nullable = false)
-	@Fetch(FetchMode.JOIN)
+//	@JoinColumn(nullable = false)
 	private Domain domain;
-	@OneToMany(targetEntity = com.demo.model.ProformaInvoice.class,cascade = CascadeType.ALL)
-    private List<ProformaInvoice> proformaInvoiceList=new ArrayList<>();
-	@OneToOne(mappedBy = "organisation")
-	private ProformaUser proformaUSer;
+//	@OneToOne(mappedBy = "organisation")
+//	private ProformaUser proformaUSer;
 	public Organisation() {
 	}
-	public Organisation(String organisationName,String uniqueKey, Domain domainId, List<ProformaInvoice> prformaInvoice) {
+	public Organisation(String organisationName,String uniqueKey, Domain domainId) {
 		this.organisationName = organisationName;
 		this.domain = domainId;
-		this.proformaInvoiceList = prformaInvoice;
+//		this.proformaInvoiceList = prformaInvoice;
 		this.uniqueKey=uniqueKey;
 	}
 	public String getOrganisationName() {
@@ -54,14 +43,14 @@ public class Organisation {
 	public void setDomainId(Domain domainId) {
 		this.domain = domainId;
 	}
-	public List<ProformaInvoice> getPrformaInvoice() {
-		return proformaInvoiceList;
-	}
-	public void addPrformaInvoice(ProformaInvoice proformaInvoice) {
-		if(proformaInvoice!=null) {
-		    proformaInvoiceList.add(proformaInvoice);	
-		}
-	}
+//	public List<ProformaInvoice> getPrformaInvoice() {
+//		return proformaInvoiceList;
+//	}
+//	public void addPrformaInvoice(ProformaInvoice proformaInvoice) {
+//		if(proformaInvoice!=null) {
+//		    proformaInvoiceList.add(proformaInvoice);	
+//		}
+//	}
 	public Long getId() {
 		return id;
 	}
@@ -70,8 +59,5 @@ public class Organisation {
 	}
 	public void setUniqueKey(String uniqueKey) {
 		this.uniqueKey = uniqueKey;
-	}
-	
-    
-    
+	}   
 }

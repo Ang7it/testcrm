@@ -19,13 +19,10 @@ public class Domain {
 	private Long id;
 	@NotNull
 	private String domainName;
-	@OneToMany(targetEntity = com.demo.model.Domain.class,cascade = CascadeType.ALL)
-	private List<Organisation> organisations=new ArrayList<>();
 	public Domain() {
 	}
-	public Domain(String domainName, List<Organisation> organisations) {
+	public Domain(String domainName) {
 		this.domainName = domainName;
-		this.organisations = organisations;
 	}
 	public String getDomainName() {
 		return domainName;
@@ -33,14 +30,7 @@ public class Domain {
 	public void setDomainName(String domainName) {
 		this.domainName = domainName;
 	}
-	public List<Organisation> getOrgansiations() {
-		return organisations;
-	}
-	public void addOrgansiation(Organisation organsiation) {
-		if(organsiation!=null) {
-		     organisations.add(organsiation);	
-		}
-	}
+	
 	public Long getId() {
 		return id;
 	}

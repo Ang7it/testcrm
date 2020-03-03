@@ -22,12 +22,11 @@ public class PaymentDetails {
 	private Long id;
 	private String piNumber;
 	@ManyToOne
-	@JoinColumn(nullable = false)
 	private ProformaInvoice proformaInvoice;
 	@Temporal(TemporalType.DATE)
 	private Date paymentDate;
 	private int paymentAmount;
-	private char peFormStatus;
+//	private char peFormStatus;
 	private String paymentUTRDetails;
 	@Column(nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	private Timestamp piCreationTimestamp;
@@ -40,7 +39,7 @@ public class PaymentDetails {
 		this.piNumber = piNumber;
 		this.paymentDate = paymentDate;
 		this.paymentAmount = paymentAmount;
-		this.peFormStatus = peFormStatus;
+//		this.peFormStatus = peFormStatus;
 		this.paymentUTRDetails = paymentUTRDetails;
 		this.piCreationTimestamp = piCreationTimestamp;
 	}
@@ -69,13 +68,13 @@ public class PaymentDetails {
 		this.paymentAmount = paymentAmount;
 	}
 
-	public char getPeFormStatus() {
-		return peFormStatus;
-	}
-
-	public void setPeFormStatus(char peFormStatus) {
-		this.peFormStatus = peFormStatus;
-	}
+//	public char getPeFormStatus() {
+//		return peFormStatus;
+//	}
+//
+//	public void setPeFormStatus(char peFormStatus) {
+//		this.peFormStatus = peFormStatus;
+//	}
 
 	public String getPaymentUTRDetails() {
 		return paymentUTRDetails;

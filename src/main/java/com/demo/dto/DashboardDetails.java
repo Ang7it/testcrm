@@ -1,4 +1,4 @@
-package com.demo.model;
+package com.demo.dto;
 
 public class DashboardDetails {
     private String domainName;
